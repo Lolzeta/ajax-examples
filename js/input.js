@@ -1,17 +1,20 @@
 var procesos = [];
 
 $(function(){
-    $('#numero1').change(devolver);
-    $('#numero2').change(devolver);
+    $('#numero1').change(devolver(this.value));
+    $('#numero2').change(devolver(this.value));
+    $('#enviado').submit(function(event){
+        event.preventDefault();
+    })
 
 });
 
-function devolver(){
+function devolver(valorInputNumero){
         
     $.ajax({
         url:"servidor/numeros.php",
         method:'POST',
-        data:{numero:this.value},
+        data:{numero:valorInputNumero},
         type:"JSON",
         beforeSend:function(){
             $("#spinner").show();
@@ -34,5 +37,4 @@ function devolver(){
           $("#spinner").hide();
         }
       })
-      
 }
